@@ -26,6 +26,8 @@
   <meta name="twitter:description" content="農薬に頼らないための工夫を、工程として誠実に語れる米農家。北海道北竜町から。">
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Marcellus&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;600&display=swap');
+
     /* =====================================================
        CSS Custom Properties（ブランドカラー・タイポグラフィ）
        ここを変更するとサイト全体の色・フォントが変わります
@@ -54,6 +56,28 @@
 
       /* ── トランジション ── */
       --tr: 0.28s ease;
+    }
+
+    :root {
+      --c-primary:     #243826;
+      --c-secondary:   #8d7453;
+      --c-accent:      #d9ba81;
+      --c-bg:          #f5efe4;
+      --c-bg-alt:      #e7ddcc;
+      --c-surface:     rgba(255, 248, 239, 0.72);
+      --c-surface-strong: rgba(255, 251, 245, 0.88);
+      --c-text:        #20180f;
+      --c-text-muted:  #6b5d4a;
+      --c-border:      rgba(86, 67, 42, 0.14);
+      --c-white:       #fffaf4;
+      --f-serif: "Cormorant Garamond", "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+      --f-display: "Marcellus", "Noto Serif JP", "Yu Mincho", serif;
+      --f-sans:  "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+      --max-w:  1120px;
+      --shadow-soft: 0 24px 50px rgba(36, 26, 12, 0.10);
+      --shadow-strong: 0 32px 80px rgba(28, 20, 10, 0.16);
+      --radius-lg: 30px;
+      --radius-md: 22px;
     }
 
     /* =====================================================
@@ -1052,6 +1076,606 @@
     }
 
     /* =====================================================
+       Rich Visual Enhancement
+       ===================================================== */
+    ::selection {
+      background: rgba(217, 186, 129, 0.28);
+      color: var(--c-text);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top, rgba(255, 247, 233, 0.78), rgba(255, 247, 233, 0) 34%),
+        linear-gradient(180deg, #f8f1e6 0%, #f4edde 45%, #efe5d4 100%);
+      color: var(--c-text);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.18), rgba(255,255,255,0.18)),
+        repeating-linear-gradient(
+          90deg,
+          rgba(92, 72, 43, 0.035) 0,
+          rgba(92, 72, 43, 0.035) 1px,
+          transparent 1px,
+          transparent 120px
+        );
+      mix-blend-mode: multiply;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    .fi {
+      transform: translateY(30px) scale(0.985);
+      filter: blur(8px);
+      transition:
+        opacity 0.85s ease,
+        transform 0.95s cubic-bezier(.2,.7,.2,1),
+        filter 0.95s ease;
+    }
+
+    .fi.in {
+      filter: blur(0);
+      transform: translateY(0) scale(1);
+    }
+
+    .site-nav {
+      top: 16px;
+      left: 18px;
+      right: 18px;
+      height: 64px;
+      border: 1px solid rgba(255, 250, 244, 0.28);
+      border-radius: 999px;
+      background: rgba(30, 24, 16, 0.34);
+      box-shadow: 0 16px 36px rgba(23, 16, 9, 0.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: background var(--tr), box-shadow var(--tr), transform var(--tr);
+    }
+
+    .site-nav.scrolled {
+      background: rgba(31, 24, 16, 0.62);
+      box-shadow: 0 18px 42px rgba(16, 12, 7, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .nav-inner {
+      max-width: 1240px;
+      padding: 0 28px;
+    }
+
+    .nav-logo {
+      font-family: var(--f-display);
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      color: rgba(255, 248, 240, 0.92);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: rgba(255, 246, 236, 0.82);
+      letter-spacing: 0.12em;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: rgba(255, 250, 244, 1);
+    }
+
+    .nav-btn span {
+      background: rgba(255, 248, 240, 0.9);
+    }
+
+    .mobile-nav {
+      top: 92px;
+      left: 18px;
+      right: 18px;
+      border: 1px solid rgba(86, 67, 42, 0.12);
+      border-radius: 24px;
+      background: rgba(255, 249, 241, 0.94);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .mobile-nav ul {
+      padding: 10px 22px 18px;
+    }
+
+    .hero {
+      align-items: stretch;
+      min-height: 100vh;
+      padding-top: 0;
+      isolation: isolate;
+      background:
+        linear-gradient(180deg, rgba(25, 20, 14, 0.16), rgba(25, 20, 14, 0.46));
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 180px;
+      background: linear-gradient(180deg, rgba(245, 239, 228, 0) 0%, rgba(245, 239, 228, 0.92) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-bg {
+      background: #6d8e5e;
+      overflow: hidden;
+      transform: translateY(var(--hero-shift, 0px)) scale(1.02);
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: -3%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.08);
+      transition: opacity 1.6s ease, transform 7.5s ease;
+      will-change: opacity, transform;
+    }
+
+    .hero-slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(16, 13, 10, 0.14) 0%, rgba(16, 13, 10, 0.32) 100%),
+        radial-gradient(circle at 20% 20%, rgba(255, 231, 180, 0.18), rgba(255, 231, 180, 0) 38%);
+    }
+
+    .hero-slide.is-active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hero-slide--1 {
+      background-image: url('assets/images/hero-rice-field.jpg');
+      background-position: center 42%;
+    }
+
+    .hero-slide--2 {
+      background-image: url('assets/images/story-okura-farm.jpg');
+      background-position: center 32%;
+    }
+
+    .hero-slide--3 {
+      background-image: url('assets/images/about-okura-portrait.jpg');
+      background-position: center 28%;
+    }
+
+    .hero-bg-texture {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(115deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0) 30%),
+        repeating-linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.08) 0,
+          rgba(255, 255, 255, 0.08) 1px,
+          transparent 1px,
+          transparent 18px
+        );
+      mix-blend-mode: soft-light;
+      opacity: 0.35;
+    }
+
+    .hero-overlay {
+      background:
+        linear-gradient(180deg, rgba(16, 12, 8, 0.28) 0%, rgba(16, 12, 8, 0.48) 42%, rgba(16, 12, 8, 0.78) 100%),
+        linear-gradient(90deg, rgba(12, 9, 6, 0.48) 0%, rgba(12, 9, 6, 0.06) 50%, rgba(12, 9, 6, 0.34) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      z-index: 3;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 48px;
+      align-items: end;
+      padding: 152px var(--sp-h) 124px;
+    }
+
+    .hero-copy {
+      max-width: 700px;
+    }
+
+    .hero-eyebrow,
+    .hero-title,
+    .hero-sub,
+    .hero-scroll,
+    .hero-badge {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero.hero-ready .hero-eyebrow,
+    .hero.hero-ready .hero-title,
+    .hero.hero-ready .hero-sub,
+    .hero.hero-ready .hero-scroll,
+    .hero.hero-ready .hero-badge {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero.hero-ready .hero-title { transition-delay: 0.14s; }
+    .hero.hero-ready .hero-sub { transition-delay: 0.28s; }
+    .hero.hero-ready .hero-scroll { transition-delay: 0.42s; }
+    .hero.hero-ready .hero-badge { transition-delay: 0.24s; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255, 247, 235, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 250, 242, 0.08);
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      color: rgba(255, 245, 229, 0.76);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: rgba(255, 243, 223, 0.58);
+    }
+
+    .hero-title {
+      font-family: var(--f-display);
+      font-size: clamp(2.6rem, 6vw, 5.3rem);
+      letter-spacing: 0.08em;
+      line-height: 1.22;
+      text-shadow: 0 10px 28px rgba(0, 0, 0, 0.20);
+      margin-bottom: 24px;
+    }
+
+    .hero-title .line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero-title .line > span,
+    .hero-sub .line > span {
+      display: inline-block;
+      transform: translateY(110%);
+      transition: transform 0.9s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero.hero-ready .hero-title .line > span,
+    .hero.hero-ready .hero-sub .line > span {
+      transform: translateY(0);
+    }
+
+    .hero.hero-ready .hero-title .line:nth-child(2) > span {
+      transition-delay: 0.24s;
+    }
+
+    .hero-sub {
+      max-width: 560px;
+      font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+      color: rgba(255, 248, 238, 0.84);
+      line-height: 2.1;
+      margin-bottom: 52px;
+    }
+
+    .hero-sub .line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero.hero-ready .hero-sub .line:nth-child(1) > span {
+      transition-delay: 0.32s;
+    }
+
+    .hero.hero-ready .hero-sub .line:nth-child(2) > span {
+      transition-delay: 0.40s;
+    }
+
+    .hero-scroll {
+      gap: 14px;
+      letter-spacing: 0.34em;
+      color: rgba(255,255,255,0.56);
+    }
+
+    .hero-scroll-line {
+      width: 54px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-scroll-line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95), transparent);
+      animation: shimmerLine 2.6s ease-in-out infinite;
+    }
+
+    .hero-rail {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+
+    .hero-badge {
+      align-self: end;
+      padding: 24px 24px 22px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255, 251, 245, 0.16), rgba(255, 251, 245, 0.08));
+      border: 1px solid rgba(255, 245, 229, 0.18);
+      box-shadow: 0 28px 48px rgba(0, 0, 0, 0.14);
+      backdrop-filter: blur(16px);
+      color: rgba(255, 248, 238, 0.92);
+    }
+
+    .hero-badge-label {
+      display: block;
+      margin-bottom: 14px;
+      font-size: 0.68rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(255, 243, 223, 0.62);
+    }
+
+    .hero-badge-value {
+      display: block;
+      font-family: var(--f-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      letter-spacing: 0.08em;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .hero-badge-note {
+      display: block;
+      font-size: 0.83rem;
+      line-height: 1.9;
+      color: rgba(255, 248, 238, 0.78);
+    }
+
+    .scene-strip {
+      position: relative;
+      z-index: 4;
+      margin: -82px 0 54px;
+      overflow: hidden;
+      padding: 0 0 10px;
+    }
+
+    .scene-strip::before,
+    .scene-strip::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: min(12vw, 140px);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .scene-strip::before {
+      left: 0;
+      background: linear-gradient(90deg, #f5efe4 0%, rgba(245, 239, 228, 0) 100%);
+    }
+
+    .scene-strip::after {
+      right: 0;
+      background: linear-gradient(270deg, #f5efe4 0%, rgba(245, 239, 228, 0) 100%);
+    }
+
+    .scene-track {
+      display: flex;
+      width: max-content;
+      gap: 18px;
+      padding: 0 18px;
+      margin-bottom: 18px;
+      animation: galleryFlow 40s linear infinite;
+    }
+
+    .scene-track--reverse {
+      animation-direction: reverse;
+      animation-duration: 48s;
+    }
+
+    .scene-card {
+      position: relative;
+      flex: 0 0 auto;
+      width: clamp(220px, 26vw, 340px);
+      aspect-ratio: 1.1 / 0.72;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      background-size: cover;
+      background-position: center;
+      transform: translateZ(0);
+    }
+
+    .scene-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(28, 21, 13, 0) 45%, rgba(28, 21, 13, 0.42) 100%);
+    }
+
+    .scene-card::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 247, 237, 0.88);
+    }
+
+    .scene-card--field  { background-image: url('assets/images/hero-rice-field.jpg'); }
+    .scene-card--story  { background-image: url('assets/images/story-okura-farm.jpg'); }
+    .scene-card--owner  { background-image: url('assets/images/about-okura-portrait.jpg'); background-position: center 30%; }
+    .scene-card--grain  { background-image: url('assets/images/variety-special-yumepirika.jpg'); background-position: center top; }
+    .scene-card--meal   { background-image: url('assets/images/variety-cooked-rice.jpg'); }
+    .scene-card--event  { background-image: url('assets/images/activities-okura-event.jpg'); }
+
+    .label {
+      letter-spacing: 0.34em;
+      color: rgba(141, 116, 83, 0.82);
+    }
+
+    .sec-title {
+      font-family: var(--f-display);
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      letter-spacing: 0.06em;
+      line-height: 1.35;
+    }
+
+    .accent-line {
+      width: 52px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(217, 186, 129, 0.15), rgba(217, 186, 129, 1), rgba(217, 186, 129, 0.15));
+      margin-bottom: 32px;
+    }
+
+    .about,
+    .story,
+    .cultivation,
+    .varieties,
+    .land,
+    .awards,
+    .activities,
+    .jas,
+    .faq,
+    .contact {
+      position: relative;
+    }
+
+    .about::before,
+    .story::before,
+    .cultivation::before,
+    .varieties::before,
+    .land::before,
+    .awards::before,
+    .activities::before,
+    .jas::before,
+    .faq::before,
+    .contact::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0)),
+        radial-gradient(circle at top right, rgba(255,255,255,0.16), rgba(255,255,255,0) 36%);
+      opacity: 0.65;
+    }
+
+    .img-ph,
+    .process-card,
+    .variety-card,
+    .award-item,
+    .contact-inner,
+    .jas-badge,
+    .faq-item {
+      border-color: rgba(95, 73, 44, 0.10);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .about-img,
+    .story-img,
+    .process-img,
+    .variety-img,
+    .land-img,
+    .activities-img {
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-strong);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-img::after,
+    .story-img::after,
+    .process-img::after,
+    .variety-img::after,
+    .land-img::after,
+    .activities-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0) 32%),
+        linear-gradient(180deg, rgba(17, 13, 9, 0) 52%, rgba(17, 13, 9, 0.22) 100%);
+      pointer-events: none;
+    }
+
+    .process-card,
+    .variety-card,
+    .award-item,
+    .faq-item,
+    .contact-inner {
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 251, 245, 0.92), rgba(250, 243, 233, 0.88));
+      backdrop-filter: blur(8px);
+    }
+
+    .process-card,
+    .variety-card,
+    .award-item {
+      transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+    }
+
+    .process-card:hover,
+    .variety-card:hover,
+    .award-item:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-strong);
+      border-color: rgba(217, 186, 129, 0.4);
+    }
+
+    .story {
+      background:
+        linear-gradient(180deg, rgba(233, 221, 204, 0.78), rgba(233, 221, 204, 0.92)),
+        radial-gradient(circle at right top, rgba(255, 247, 231, 0.88), rgba(255, 247, 231, 0) 32%);
+    }
+
+    .site-footer {
+      background:
+        linear-gradient(180deg, rgba(24, 19, 13, 0.96), rgba(24, 19, 13, 1)),
+        radial-gradient(circle at top left, rgba(217, 186, 129, 0.14), rgba(217, 186, 129, 0) 32%);
+      color: rgba(255, 248, 238, 0.74);
+      margin-top: 32px;
+    }
+
+    .footer-logo {
+      font-family: var(--f-display);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    @keyframes galleryFlow {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes shimmerLine {
+      0% { transform: translateX(-110%); }
+      55%, 100% { transform: translateX(120%); }
+    }
+
+    /* =====================================================
        レスポンシブ（モバイル対応）
        ===================================================== */
     @media (max-width: 768px) {
@@ -1064,9 +1688,54 @@
       /* ナビ */
       .nav-links { display: none; }
       .nav-btn   { display: flex; }
+      .site-nav {
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        height: 58px;
+      }
+      .nav-inner { padding: 0 18px; }
+      .nav-logo {
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+      }
+      .mobile-nav {
+        top: 78px;
+        left: 12px;
+        right: 12px;
+      }
 
       /* ヒーロー */
-      .hero-content { padding-bottom: 52px; }
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        align-items: end;
+        padding: 126px var(--sp-h) 104px;
+      }
+      .hero-title {
+        font-size: clamp(2.1rem, 10vw, 3.4rem);
+        letter-spacing: 0.04em;
+      }
+      .hero-sub {
+        font-size: 0.94rem;
+        margin-bottom: 36px;
+      }
+      .hero-rail { justify-content: flex-start; }
+      .hero-badge {
+        width: min(100%, 320px);
+        padding: 20px 20px 18px;
+      }
+      .scene-strip {
+        margin: -62px 0 42px;
+      }
+      .scene-track {
+        gap: 14px;
+        padding: 0 14px;
+      }
+      .scene-card {
+        width: 260px;
+        border-radius: 18px;
+      }
 
       /* グリッドを1カラムに */
       .about-grid,
@@ -1091,11 +1760,27 @@
 
     @media (max-width: 400px) {
       .variety-grid { grid-template-columns: 1fr; }
+      .scene-card { width: 78vw; }
+      .hero-badge-value { font-size: 2rem; }
     }
 
     /* アクセシビリティ: アニメーション削減設定 */
     @media (prefers-reduced-motion: reduce) {
       .fi { opacity: 1; transform: none; transition: none; }
+      .hero-eyebrow,
+      .hero-title,
+      .hero-sub,
+      .hero-scroll,
+      .hero-badge,
+      .hero-title .line > span,
+      .hero-sub .line > span,
+      .hero-slide {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .scene-track { animation: none; }
+      .hero-scroll-line::after { animation: none; }
       html { scroll-behavior: auto; }
     }
   </style>
@@ -1148,30 +1833,72 @@
        ===================================================== -->
   <section class="hero" id="top" aria-label="ヒーロー">
     <!-- ★ ここにヒーロー背景画像を設定してください（CSSコメント参照） -->
-    <div class="hero-bg" role="img" aria-label="ナチュラルファーム黄倉の田んぼ風景"></div>
+    <div class="hero-bg" role="img" aria-label="ナチュラルファーム黄倉の田んぼ風景">
+      <div class="hero-slide hero-slide--1 is-active" aria-hidden="true"></div>
+      <div class="hero-slide hero-slide--2" aria-hidden="true"></div>
+      <div class="hero-slide hero-slide--3" aria-hidden="true"></div>
+      <div class="hero-bg-texture" aria-hidden="true"></div>
+    </div>
     <div class="hero-overlay" aria-hidden="true"></div>
 
     <div class="hero-content">
-      <!-- eyebrow -->
-      <p class="hero-eyebrow">Natural Farm Okura &nbsp;|&nbsp; Hokuryu-cho, Hokkaido</p>
+      <div class="hero-copy">
+        <p class="hero-eyebrow">Natural Farm Okura &nbsp;|&nbsp; Hokuryu-cho, Hokkaido</p>
 
-      <!-- メインキャッチコピー
-           ★ コピーを変更する場合はここを編集してください -->
-      <h1 class="hero-title">
-        温湯と食酢から始まる、<br>
-        北竜町の米づくり。
-      </h1>
+        <h1 class="hero-title">
+          <span class="line"><span>温湯と食酢から始まる、</span></span>
+          <span class="line"><span>北竜町の米づくり。</span></span>
+        </h1>
 
-      <!-- サブコピー -->
-      <p class="hero-sub">
-        農薬に頼らないために、何をするか。<br>
-        その答えを、工程で示してきた農家です。
-      </p>
+        <p class="hero-sub">
+          <span class="line"><span>農薬に頼らないために、何をするか。</span></span>
+          <span class="line"><span>その答えを、工程で示してきた農家です。</span></span>
+        </p>
 
-      <div class="hero-scroll" aria-hidden="true">
-        <span class="hero-scroll-line"></span>
-        <span>Scroll</span>
+        <div class="hero-scroll" aria-hidden="true">
+          <span class="hero-scroll-line"></span>
+          <span>Scroll</span>
+        </div>
       </div>
+
+      <div class="hero-rail">
+        <aside class="hero-badge" aria-label="農場の特徴">
+          <span class="hero-badge-label">Signature</span>
+          <strong class="hero-badge-value">Organic Care</strong>
+          <span class="hero-badge-note">温湯処理・食酢活用・徹底除草<br>工程まで語れる北竜町の米づくり</span>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene-strip" aria-label="農場の風景ギャラリー">
+    <div class="scene-track">
+      <div class="scene-card scene-card--field" data-label="Rice Field" aria-hidden="true"></div>
+      <div class="scene-card scene-card--story" data-label="Landscape" aria-hidden="true"></div>
+      <div class="scene-card scene-card--owner" data-label="Farmer" aria-hidden="true"></div>
+      <div class="scene-card scene-card--grain" data-label="Yumepirika" aria-hidden="true"></div>
+      <div class="scene-card scene-card--meal" data-label="Taste" aria-hidden="true"></div>
+      <div class="scene-card scene-card--event" data-label="Activity" aria-hidden="true"></div>
+      <div class="scene-card scene-card--field" data-label="Rice Field" aria-hidden="true"></div>
+      <div class="scene-card scene-card--story" data-label="Landscape" aria-hidden="true"></div>
+      <div class="scene-card scene-card--owner" data-label="Farmer" aria-hidden="true"></div>
+      <div class="scene-card scene-card--grain" data-label="Yumepirika" aria-hidden="true"></div>
+      <div class="scene-card scene-card--meal" data-label="Taste" aria-hidden="true"></div>
+      <div class="scene-card scene-card--event" data-label="Activity" aria-hidden="true"></div>
+    </div>
+    <div class="scene-track scene-track--reverse" aria-hidden="true">
+      <div class="scene-card scene-card--meal" data-label="Table" aria-hidden="true"></div>
+      <div class="scene-card scene-card--field" data-label="Season" aria-hidden="true"></div>
+      <div class="scene-card scene-card--event" data-label="Community" aria-hidden="true"></div>
+      <div class="scene-card scene-card--story" data-label="Hokuryu" aria-hidden="true"></div>
+      <div class="scene-card scene-card--grain" data-label="Craft" aria-hidden="true"></div>
+      <div class="scene-card scene-card--owner" data-label="Family" aria-hidden="true"></div>
+      <div class="scene-card scene-card--meal" data-label="Table" aria-hidden="true"></div>
+      <div class="scene-card scene-card--field" data-label="Season" aria-hidden="true"></div>
+      <div class="scene-card scene-card--event" data-label="Community" aria-hidden="true"></div>
+      <div class="scene-card scene-card--story" data-label="Hokuryu" aria-hidden="true"></div>
+      <div class="scene-card scene-card--grain" data-label="Craft" aria-hidden="true"></div>
+      <div class="scene-card scene-card--owner" data-label="Family" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -1833,11 +2560,41 @@
       fadeEls.forEach(el => el.classList.add('in'));
     }
 
+    /* ── ヒーロー演出 ───────────────────────── */
+    const hero = document.querySelector('.hero');
+    const heroBg = document.querySelector('.hero-bg');
+    const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (hero) {
+      requestAnimationFrame(() => {
+        hero.classList.add('hero-ready');
+      });
+    }
+
+    if (heroSlides.length > 1 && !reducedMotionQuery.matches) {
+      let activeIndex = 0;
+
+      window.setInterval(() => {
+        heroSlides[activeIndex].classList.remove('is-active');
+        activeIndex = (activeIndex + 1) % heroSlides.length;
+        heroSlides[activeIndex].classList.add('is-active');
+      }, 5200);
+    }
+
     /* ── ナビゲーションのスクロール影 ──────── */
     const siteNav = document.getElementById('siteNav');
-    window.addEventListener('scroll', () => {
+    const updateScrollState = () => {
       siteNav.classList.toggle('scrolled', window.scrollY > 32);
-    }, { passive: true });
+
+      if (heroBg && !reducedMotionQuery.matches) {
+        const shift = Math.min(window.scrollY * 0.08, 36);
+        heroBg.style.setProperty('--hero-shift', `${shift}px`);
+      }
+    };
+
+    updateScrollState();
+    window.addEventListener('scroll', updateScrollState, { passive: true });
   </script>
 
 </body>
